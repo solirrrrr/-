@@ -1,1 +1,47 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+public class xiaochuzifu {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			int n=in.nextInt();
+			String[] s=new String[n];
+			for(int i=0;i<n;i++) {
+				s[i]=in.next();
+			}
+			ArrayList<String> res=fun(n,s);
+			for(int j=0;j<res.size();j++) {
+				System.out.println(res.get(j)+" ");
+			}
+		}
+	}
+	
+	public static ArrayList<String> fun(int n,String[] s) {
+		ArrayList<String> list=new ArrayList<>();
+		for(int i=0;i<n;i++) {
+			int len=s[i].length();
+			int k=len/8;
+			int start=0;
+			if(len%8!=0) {
+				int num=8-len%8;
+				for(int j=0;j<num;j++) {
+					s[i]+="0";
+				}
+				k+=1;
+			}
+			StringBuffer sb=new StringBuffer(s[i]);
+			for(int j=0;j<k;j++) {
+				if(start+8<sb.length()) {
+				   list.add(s[i].substring(start, start+8));
+				   start+=8;
+				}else {
+					list.add(s[i].substring(start));
+				}
+			}
+		}
+		Collections.sort(list);
+		return list;
+	}
+}
 
