@@ -1,0 +1,34 @@
+import java.util.Scanner;
+/*
+ * 递归写法，不太会用，自己写的不知道怎么退出递归
+ */
+public class xiaochuzifu {
+	private static int count=0;
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			String s=in.next();
+			fun(s);
+			System.out.println(count);
+		}
+	}
+	
+	public static void fun(String s) {
+		boolean flag=false;
+		StringBuffer sb=new StringBuffer(s);
+		for(int i=0;i<s.length()-1;i++) {
+			if(s.charAt(i)==s.charAt(i+1)) {
+				count++;	
+				flag=true;
+				sb=new StringBuffer(s.substring(0, i)).append(i+2);
+				i-=2;
+				if(i<0) {
+					break;
+				}
+			}
+		}
+		if(flag) {
+			fun(sb.toString());
+		}
+	}
+}
