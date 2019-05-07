@@ -1,1 +1,50 @@
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			String s=in.next();
+			System.out.println(StrToInt(s));
+		}
+	}
+	
+	public static int StrToInt(String str) {
+        if(str.length()==0||str.equals(" ")){
+            return 0;
+        }
+        char[] ch=str.toCharArray();
+        int sign=0;
+        int sum=0;
+        int count=0;
+        if(ch[0]=='-'){
+            sign=1;
+        }
+        if(!judge(str)) return 0;
+        for(int i=sign;i<ch.length;i++){
+            if(ch[i]=='+') continue;
+            if(ch[i]=='.') {
+            	break;
+            }else {
+            sum=sum*10+ch[i]-48;
+            }
+        }
+        return sign==0?sum:-1*sum;
+    }
+	
+	public static boolean judge(String str) {
+		int sign=0;
+		int count=0;
+		char[] ch=str.toCharArray();
+		if(ch[0]=='-'){
+            sign=1;
+        }
+		for(int i=sign;i<ch.length;i++) {
+			if(ch[i]=='+') continue;
+			if((ch[i]<48||ch[i]>57)&&(ch[i]!='.')) return false;
+			if(ch[i]=='.') count++;
+			if(count>1) return false;
+		}
+		return true;
+	}
+}
 
