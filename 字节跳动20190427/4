@@ -1,1 +1,38 @@
-
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			int n=in.nextInt();
+			int k=in.nextInt();
+			int[] a=new int[n];
+			for(int i=0;i<n;i++) {
+				a[i]=in.nextInt();
+			}
+			System.out.println(allOne(n,k,a));
+		}
+	}
+	
+	public static int allOne(int n,int k,int[] a) {
+		int l=0,r=0,change=0;
+		int ans=1;
+		for(int i=0;i<n;i++) {
+			if(a[i]==0) {
+				if(change<k) {
+					change++;
+					r++;
+				}else {
+					while(l<=r&&a[l]!=0) {
+						l++;
+					}
+					l++;
+					r++;
+				}
+			}else {
+				r++;
+			}
+			ans=Math.max(ans, r-l);
+		}
+		return ans;
+	}
+}
