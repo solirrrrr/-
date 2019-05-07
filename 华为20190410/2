@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main{
+	public static String reverseString(String s) {
+		Stack<Character> stack=new Stack<>();
+		for(int i=0;i<s.length();i++) {
+			if(s.charAt(i)==')'||s.charAt(i)==']'||s.charAt(i)=='}'){
+				StringBuilder sb=new StringBuilder();
+				while(stack.peek()!='('&&stack.peek()!='['&&stack.peek()!='{') {
+					sb.append(stack.pop());
+				}
+				stack.pop();
+				int count=0;
+				int num=1;
+				while(stack.peek()>='0'&&stack.peek()<='9') {
+					count=count+Integer.parseInt(stack.pop().toString())*num;
+					num*=10;
+				}
+				for(int k=0;k<count;k++) {
+					for(int j=sb.length()-1;j>=0;j--) {
+						stack.push(sb.charAt(j));
+					}
+				}
+			}else {
+				stack.push(s.charAt(i));
+			}
+		}
+		StringBuilder sb1=new StringBuilder();
+		while(!stack.isEmpty()) {
+			sb1.append(stack.pop());
+		}
+		return sb1.toString();
+	}
+	
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			String s=in.nextLine();
+			System.out.println(reverseString(s));
+		}
+	}
+}
