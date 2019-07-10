@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class toutiao {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		while(in.hasNext()) {
+			int n=in.nextInt();
+			int m=yiyuan(n);
+			int left=(m+1)*m/2;
+			int right=(m+1)*(m+2)/2;
+			int mid=(int)Math.pow(m+1, 2)/2;
+			if((m%2!=0)&&(n==mid)){
+				System.out.println(2*m+1);
+			}else if(n<=mid) {
+				int size=(n-left)*2+m;
+				System.out.println(size);
+			}else {
+				int size1=(right-n)*2+m+1;
+				System.out.println(size1);
+			}
+			
+		}
+	}
+	public static int yiyuan(int n) {
+		return (int)(Math.sqrt(1+8*n)-1)/2;
+	}
+}
